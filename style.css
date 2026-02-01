@@ -1,0 +1,449 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #000;
+  font-family: 'Press Start 2P', monospace;
+  color: #f2eaea;
+}
+
+/* OVERLAYS */
+.vhs, .noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.vhs {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.04) 0px,
+    rgba(255,255,255,.04) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: scroll 0.6s linear infinite;
+}
+
+.noise {
+  opacity: 0.05;
+  animation: noise 0.2s infinite steps(2);
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem 1rem;
+}
+
+.logo {
+  color: #ff9c9c;
+  text-shadow: 4px 4px #400000;
+  animation: jitter 0.15s infinite;
+}
+
+.subtitle {
+  font-size: 0.55rem;
+  opacity: 0.6;
+}
+
+/* STATUS BAR */
+.status-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.6rem;
+  border-top: 2px solid #300;
+  border-bottom: 2px solid #300;
+  font-size: 0.45rem;
+  background: #050505;
+}
+
+/* BATTERY */
+.battery {
+  display: inline-block;
+  width: 40px;
+  height: 10px;
+  border: 2px solid #ff9c9c;
+  margin-left: 6px;
+  position: relative;
+}
+
+.battery-fill {
+  height: 100%;
+  width: 20%;
+  background: #ff9c9c;
+}
+
+/* GRID */
+.grid {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+}
+
+/* PANELS */
+.panel {
+  background: #070707;
+  border: 2px solid #2a0000;
+  padding: 1.2rem;
+  box-shadow: inset 0 0 15px rgba(255,0,0,.1);
+  animation: pulse 1.8s infinite alternate;
+}
+
+.panel:hover {
+  animation: jitter 0.12s infinite;
+}
+
+.main-panel {
+  grid-column: span 2;
+  grid-row: span 2;
+  transform: translateY(-10px);
+}
+
+.wide { grid-column: span 2; }
+.tall { grid-row: span 2; }
+
+.glitchy {
+  animation: flicker 0.2s infinite;
+}
+
+/* SYSTEM PANEL EXTRA */
+.system-panel {
+  position: relative;
+}
+
+.blink {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 0.4rem;
+  color: #ff9c9c;
+  animation: blink 1s infinite;
+}
+
+/* TEXT */
+h2 {
+  font-size: 0.7rem;
+  color: #ffb3b3;
+}
+
+p, li {
+  font-size: 0.48rem;
+  line-height: 1.6;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+
+.pic {
+  aspect-ratio: 1;
+  background: #111;
+  border: 1px dashed #333;
+  animation: noise 0.3s infinite steps(2);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  font-size: 0.4rem;
+  opacity: 0.4;
+  padding: 1.5rem;
+}
+
+/* ANIMATIONS */
+@keyframes jitter {
+  0% { transform: translate(0); }
+  50% { transform: translate(1px,-1px); }
+  100% { transform: translate(-1px,1px); }
+}
+
+@keyframes pulse {
+  from { filter: brightness(0.9); }
+  to { filter: brightness(1.1); }
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes scroll {
+  from { background-position-y: 0; }
+  to { background-position-y: 4px; }
+}
+
+@keyframes noise {
+  from { filter: brightness(0.9); }
+  to { filter: brightness(1.2); }
+}
+
+@keyframes blink {
+  0%,50%,100% { opacity: 1; }
+  60%,90% { opacity: 0; }
+}
+
+/* SYSTEM TICKER */
+.system-ticker {
+  font-size: 0.45rem;
+  padding: 0.4rem;
+  text-align: center;
+  background: #050505;
+  border-bottom: 2px solid #300;
+  animation: flicker 0.3s infinite;
+}
+
+/* HIDDEN TEXT */
+.hidden-text {
+  opacity: 0;
+}
+
+.panel:hover .hidden-text {
+  opacity: 1;
+}
+
+/* CAM FEEDS */
+.cam-panel .cam {
+  margin-top: 0.6rem;
+  height: 80px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #111 0px,
+    #111 2px,
+    #000 4px
+  );
+  position: relative;
+  animation: noise 0.25s infinite steps(2);
+}
+
+.cam-label {
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  font-size: 0.35rem;
+  opacity: 0.6;
+}
+
+/* SECRET PANEL */
+.secret-panel {
+  opacity: 0.6;
+  transform: rotate(-1.5deg);
+}
+
+/* EYES */
+.eyes {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 55%, #ff9c9c 2px, transparent 3px),
+    radial-gradient(circle at 53% 55%, #ff9c9c 2px, transparent 3px);
+  opacity: 0;
+  animation: eyes 14s infinite;
+}
+
+@keyframes eyes {
+  0%,90%,100% { opacity: 0; }
+  92%,96% { opacity: 0.4; }
+}
+
+/* TITLE GLITCH SWAP */
+.glitch-title::after {
+  content: attr(data-alt);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  opacity: 0;
+  color: #ff6b6b;
+  animation: glitchSwap 6s infinite;
+}
+
+@keyframes glitchSwap {
+  0%,94% { opacity: 0; }
+  95%,97% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* MOUSE GLOW */
+.mouse-glow {
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255,0,0,0.15), transparent 70%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+/* LOW POWER MODE */
+body.low-power {
+  background: #000;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+body.low-power .vhs {
+  opacity: 0.25;
+}
+
+/* ALERT POPUPS */
+.alert-popup {
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #120000;
+  border: 2px solid #ff6b6b;
+  padding: 0.6rem 1rem;
+  font-size: 0.45rem;
+  opacity: 0;
+  z-index: 10;
+  animation: flicker 0.12s infinite;
+}
+
+/* CONTROL BUTTONS */
+.ctrl-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 0.6rem;
+  font-family: inherit;
+  font-size: 0.45rem;
+  background: #0b0000;
+  color: #ff9c9c;
+  border: 2px solid #300;
+  cursor: pointer;
+  animation: pulse 2s infinite alternate;
+}
+
+.ctrl-btn:hover {
+  animation: jitter 0.1s infinite;
+}
+
+/* DOOR CLOSED MODE */
+body.door-closed {
+  filter: brightness(0.75) contrast(1.2);
+}
+
+body.door-closed::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.8);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* LIGHT FLASH */
+body.light-flash {
+  animation: lightFlash 0.4s steps(2);
+}
+
+@keyframes lightFlash {
+  0% { filter: brightness(1.8) contrast(1.3); }
+  100% { filter: brightness(1) contrast(1); }
+}
+
+/* FAKE CURSOR MODES */
+body.cursor-hidden {
+  cursor: none;
+}
+
+body.cursor-blocky {
+  cursor: crosshair;
+}
+
+/* CURSOR TRAIL DOT */
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* SHADOW BON */
+.shadow-bon {
+  position: fixed;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  filter: contrast(1.2) brightness(0.7);
+}
+/* CAM FEED LAYERING */
+.cam {
+  position: relative;
+  overflow: hidden;
+}
+
+/* SHADOW BON — CAM ONLY */
+.cam-bon {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  width: 180px;
+
+  opacity: 0;                 /* invisible by default */
+  z-index: 0;                 /* BEHIND cam UI */
+  filter: brightness(0.4) contrast(1.2);
+
+  pointer-events: none;
+}
+
+/* DISABLE GLOBAL SHADOW BON (KEEP CAM VERSION) */
+.shadow-bon:not(.cam-bon) {
+  display: none;
+}
+
+/* Crying Child sprite */
+#crying-child {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+
+  background: url("assets/cryingchild.gif") center no-repeat;
+  background-size: contain;
+
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* glitchy WALK — NO smooth motion */
+.walk-glitch {
+  animation: walkGlitch 0.08s infinite steps(2);
+}
+
+@keyframes walkGlitch {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(-2px,0); }
+  50%  { transform: translate(2px,0); }
+  75%  { transform: translate(-1px,0); }
+  100% { transform: translate(0,0); }
+}
+
+/* glitch JUMP */
+.jump-glitch {
+  animation: jumpGlitch 0.22s steps(3);
+}
+
+@keyframes jumpGlitch {
+  0%   { opacity: 1; transform: translate(0,0); }
+  30%  { opacity: 0.2; transform: translate(4px,-6px); }
+  60%  { opacity: 0.6; transform: translate(-4px,6px); }
+  100% { opacity: 1; transform: translate(0,0); }
+}
+
